@@ -1,0 +1,51 @@
+$rank5: rgba(106, 32, 95, 1);
+$rank4: rgba(106, 32, 95, 0.7);
+$rank3: rgba(106, 32, 95, 0.4);
+$rank2: rgba(106, 32, 95, 0.2);
+$rank1: #dadada;
+$foreground-light: #fff;
+$foreground-dark: #6d626b;
+
+html {
+  -webkit-font-smoothing: antialiased;
+  background: #fff;
+}
+
+.rank {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.9em;
+  width: 1.8em;
+  height: 1.8em;
+  font-size: 1em;
+  border-radius: 1em;
+  font-family: helvetica;
+
+}
+
+.rank--1 {
+  @extend .rank;
+  color: $foreground-dark;
+  background-color: $rank1;
+}
+.rank--2 {
+  @extend .rank;
+  color: $foreground-dark;
+  background-color: $rank2;
+}
+.rank--3 {
+  @extend .rank;
+  color: $foreground-light;
+  background-color: $rank3;
+}
+.rank--4 {
+  @extend .rank;
+  color: $foreground-light;
+  background-color: $rank4;
+}
+.rank--5 {
+  @extend .rank;
+  color: $foreground-light;
+  background-color: $rank5;
+}
