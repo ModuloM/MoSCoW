@@ -5,6 +5,7 @@ $rank2: rgba(106, 32, 95, 0.2);
 $rank1: #dadada;
 $foreground-light: #fff;
 $foreground-dark: #6d626b;
+$border-selected: solid .3em $rank5;
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -24,15 +25,25 @@ html {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-  line-height: 1.8em;
   width: 1.8em;
   height: 1.8em;
+  line-height: 1.8em;
   font-size: 1em;
   border-radius: 1em;
   font-family: helvetica;
 }
+.rank--input {
+  width: .83em;
+  height: 1.2em;
+  line-height: 1.35em;
+  font-size: 1em;
+  border-radius: 1em;
+  border: $border-selected;
+  padding-left: .4em;
+  font-family: helvetica;
+}
 .rank--selected {
-  border: solid .3em $rank5;
+  border: $border-selected;
   width: 1.3em;
   height: 1.25em;
   line-height: 1.35em;

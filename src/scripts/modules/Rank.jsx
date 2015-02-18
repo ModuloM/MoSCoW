@@ -4,34 +4,32 @@ var React = require('react');
 
 var Rank = React.createClass({
   getInitialState: function() {
-    return {selected: false};
+    return {
+      rank: this.props.data.rank,
+      value: this.props.data.rank,
+      selected: false,
+      editable: false
+    };
   },
   handleClick: function(event) {
-    this.setState({selected : !this.state.selected});
+    if (!this.state.editable) {
+      this.setState({selected : !this.state.selected});
+    }
   },
-  // render: function() {
-  //   var rankNodes = this.props.data.map(function (item){
-  //     var rankClass = 'rank--' + item.rank;
-  //     if (this[item.rank].state.selected) {
-  //       rankClass += ' tank--selected';
-  //     }
-      
-  //     return (
-  //       <div className="rank-container">
-  //         <div key={item.rank} className={rankClass} >
-  //           {item.rank}
-  //         </div>
-  //       </div>
-  //     );
-  //   });
-  //   return (
-  //     <div className="rank-list">
-  //       {rankNodes}
-  //     </div>
-  //   );
-  // }
+  handleDoubleClick: function(event) {
+    this.setState({editable : !this.state.editable});
+    this.setState({selected : false});
+  },
+  handleChange: function() {
+    this.setState({value: event.target.value});
+    this.setState({rank: event.target.value});
+  },
   render: function() {
-    var ranking = this.props.data.rank;
+    var ranking = this.state.rank,
+        value = this.state.value;
+    if (this.state.editable) {
+      ranking = <input type="text" className="rank--input" value={value} onChange={this.handleChange} />
+    }
     var rankClass = 'rank--' + ranking;
     if (this.state.selected) {
       rankClass += ' rank--selected';
@@ -39,7 +37,7 @@ var Rank = React.createClass({
 
     return (
       <div className="rank-container">
-        <div key={ranking} className={rankClass} onClick={this.handleClick} >
+        <div className={rankClass} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick}>
           {ranking}
         </div>
       </div>
