@@ -4,14 +4,19 @@
   "description": "Comparing tech apps",
   "main": "app.html",
   "dependencies": {
-    "react": "^0.12.2"
+    "lodash": "^3.5.0",
+    "react": "^0.12.2",
+    "reflux": "^0.2.5"
   },
   "devDependencies": {
     "browserify": "^8.1.0",
     "catw": "^0.2.0",
     "chai": "^1.9.1",
+    "firebase": "^2.2.1",
+    "firebase-tools": "^1.1.5",
     "livereload": "^0.3.5",
     "mocha": "^1.21.4",
+    "reactfire": "^0.4.0",
     "reactify": "^0.17.0",
     "sinon": "^1.10.3",
     "watchify": "^1.0.2"

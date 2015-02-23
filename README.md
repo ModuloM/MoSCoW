@@ -1,6 +1,6 @@
 # MoSCoW -- comparaison stack app 
 
-Compare & rank stack
+Compare & rank stacks
 
 
 ## Install
