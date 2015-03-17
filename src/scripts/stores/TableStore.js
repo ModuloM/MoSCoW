@@ -44,8 +44,16 @@ var TableStore = Reflux.createStore({
           code: 'CRITERIA2',
           label: 'criteria2',
           weight: 2,
-          order: 1
+          order: 3
         },
+        {
+          id: 5,
+          type: 'footer',
+          code: 'FOOTER',
+          label: 'total',
+          weight: 1,
+          order: 4
+        }
       ],
       stacks : [
         {
