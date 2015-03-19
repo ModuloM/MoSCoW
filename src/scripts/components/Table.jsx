@@ -34,17 +34,35 @@ var Table = React.createClass({
       ranks: table.ranks
     });
   },
+  handleSelectRank: function(selectedRank) {
+    var ranks = this.state.ranks;
+    ranks.map( function(rank) {
+      if (rank.id !== selectedRank.id) {
+        rank.selected = false;
+      } else {
+        rank.selected = true;
+      }
+    });
+    this.setState({ranks : ranks});
+  },
+  handleDeselectRanks: function() {
+    var ranks = this.state.ranks;
+    ranks.map( function(rank) {
+      rank.selected = false;
+    });
+    this.setState({ranks : ranks});
+  },
   computeRanks: function(stacks, rows, ranks) {
     var sum = [];
     stacks.map(function (stack) {
       sum[stack.id] = 0
       rows.map(function (row) {
         if (row.type === 'criteria') {
-          // if row is a criteria, we sum rank value * row weight
+          // if row is a criteria, we sum rank value mutliplied by row's weight
           var rank = _.find(ranks, {'descriptor_code' : row.code, stack_id : stack.id});
           sum[stack.id] += rank.value * row.weight;
         } else if (row.type === 'category') {
-          // if row is a category, we multiply sum by the row weight
+          // if row is a category, we multiply sum by the row's weight
           sum[stack.id] = sum[stack.id] * row.weight;
         }
       });
@@ -60,6 +78,8 @@ var Table = React.createClass({
         });
     var ranks = this.state.ranks;
     var sum = this.computeRanks(stacks, rows, ranks);
+    var handleSelectRank = _.bind(this.handleSelectRank, this);
+    var handleDeselectRanks = _.bind(this.handleDeselectRanks, this);
     return (
       <div>{rows.map( function(row) {
         var code = row.code,
@@ -75,11 +95,10 @@ var Table = React.createClass({
             if (type === 'header') {
               tableRow = <div key={stack.id} className="rank-container">{stack.label}</div>
             } else if (type === 'criteria'){
-              rank = ranks.filter( function(rank) { 
-                return rank.descriptor_code === code && rank.stack_id === stack.id;
-              })[0];
-              tableRow = <Rank key={stack.id} stack={stack} descriptorCode={code} rank={rank}></Rank>
+              rank = _.find( ranks, { 'descriptor_code' : code, 'stack_id' : stack.id});
+              tableRow = <Rank key={rank.id} stack={stack} descriptorCode={code} rank={rank} selected={rank.selected} editable={rank.editable}></Rank>
             } else if (type === 'category') {
+              // TODO define category row
             }
             if (type === 'footer') {
               tableRow = <div key={stack.id} className="rank-container">{sum[stack.id]}</div>

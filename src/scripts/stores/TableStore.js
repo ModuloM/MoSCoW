@@ -36,7 +36,7 @@ var TableStore = Reflux.createStore({
           code: 'CATEGORY1',
           label: 'cat1',
           weight: 17,
-          order: 2
+          order: 3
         },
         {
           id: 4,
@@ -44,7 +44,7 @@ var TableStore = Reflux.createStore({
           code: 'CRITERIA2',
           label: 'criteria2',
           weight: 2,
-          order: 3
+          order: 2
         },
         {
           id: 5,
@@ -94,19 +94,47 @@ var TableStore = Reflux.createStore({
         }
       ]
     };
+    this.table.ranks.map( function(rank){
+      rank.selected = false;
+      rank.editable = false;
+    });
     // TODO sync with Firebase
     console.log("Table loaded");
     this.trigger(this.table);
   },
-  onUpdateTableRank: function(rank, value) {
-
+  onUpdateRank: function(rank, value) {
     var rankId = _.findIndex(this.table.ranks, { 'id': rank.id });
     this.table.ranks[rankId].value = value;
+    this.table.ranks[rankId].editable = false;
+    this.table.ranks[rankId].selected = false;
 
     // TODO sync with Firebase
     console.log(`Rank ${rankId} updated with value : ${value}`);
     this.trigger(this.table);
-  }
+  },
+  onToggleSelectRank: function(selectedRank, value) {
+    this.table.ranks.map( function(rank) {
+      if (rank.id !== selectedRank.id) {
+        rank.selected = false;
+      } else {
+        rank.selected = value;
+      }
+    });
+    console.log(`Rank ${selectedRank.id} is selected`);
+    this.trigger(this.table);
+  },
+  onToggleEditRank: function(editedRank, value) {
+    console.log('youpi')
+    this.table.ranks.map( function(rank) {
+      if (rank.id !== editedRank.id) {
+        rank.editable = false;
+      } else {
+        rank.editable = value;
+      }
+    });
+    console.log(`Rank ${editedRank.id} is editable`);
+    this.trigger(this.table);
+  },
 });
 
 module.exports = TableStore;

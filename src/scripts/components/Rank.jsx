@@ -16,49 +16,36 @@ var Rank = React.createClass({
       stack: React.PropTypes.object,
       descriptorCode: React.PropTypes.string
   },
-  mixins: [
-    // Reflux.listenTo(RankStore, 'onLoadRank')
-    // ,Reflux.listenTo(RankStore, 'onUpdateRank')
-  ],
   componentWillMount: function () {
-    // RankActions.loadRank(this.props.stack.id, this.props.descriptorCode);
   },
-  // onLoadRank: function(rank) {
-  //   if (rank.id == this.state.id) {
-  //     console.log('Rank setted to : ', rank);
-  //     this.setState({rank: rank});
-  //   }
-  // },
-  // onUpdateRank: function(rank) {
-  //   console.log('Rank updated')
-  //   this.setState({rank: rank});
+  // shouldComponentUpdate: function(nextProps, nextState) {
+  //   // FIXME
+  //   return /[0, 1, 2, 3, 4, 5,]/.test(parseInt(nextProps.value, 10));
   // },
   getInitialState: function() {
     return {
-      rank: this.props.rank,
-      selected: false,
-      editable: false
+      rank: this.props.rank
     };
   },
   handleClick: function(e) {
-    if (!this.state.editable) {
-      this.setState({selected : !this.state.selected});
+    if (!this.props.editable) {
+      TableActions.toggleSelectRank(this.state.rank, !this.props.selected);
+      // this.setState({selected : !this.state.selected});
+      // this.props.onSelectRank(this.state.rank);
     }
   },
   handleDoubleClick: function(e) {
-    this.setState({editable : !this.state.editable});
-    this.setState({selected : false});
+    TableActions.toggleEditRank(this.state.rank, !this.props.editable);
+    // this.setState({editable : !this.state.editable});
+    // this.props.onDeselectRanks();
   },
-  handleCommentSubmit: function(value) {
-    TableActions.updateTableRank(this.state.rank, value);
-    this.setState({selected : false});
-    this.setState({editable : false});
+  handleRankSubmit: function(value) {
+    TableActions.updateRank(this.state.rank, value);
+    // TableActions.toggleEditRank(this.state.rank, !this.props.editable);
+    // this.props.onDeselectRanks();
   },
   render: function() {
     var ranking = this.state.rank ? this.state.rank.value : 0;
-    if (this.state.editable) {
-      ranking = <RankForm key={this.state.rank.id} value={this.state.rank.value} onRankSubmit={this.handleCommentSubmit} />
-    }
     // FIXME
     // var rankClasses = classSet({
     //   'rank--0' : this.state.rank === 0,
@@ -73,15 +60,21 @@ var Rank = React.createClass({
     var rankClasses = 'rank--' + this.state.rank.value;
     // var rankCurrent = this.state.rank ? this.state.rank.value : 0;
     // var rankClasses = 'rank--' + rankCurrent;
-    if (this.state.selected) {
+    if (this.props.selected) {
       rankClasses += ' rank--selected';
+    }
+    var element;
+    if (this.props.editable) {
+      element = <RankForm key={this.state.rank.id} value={ranking} onRankSubmit={this.handleRankSubmit} />
+    } else {
+      element = <div className={rankClasses} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick} >
+                  {ranking}
+                </div>     
     }
 
     return (
       <div className="rank-container">
-        <div className={rankClasses} onClick={this.handleClick} onDoubleClick={this.handleDoubleClick} >
-          {ranking}
-        </div>
+        {element}
       </div>
     );
   }

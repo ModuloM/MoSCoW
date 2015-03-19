@@ -4,7 +4,10 @@ var Reflux = require('reflux');
 
 var TableActions = Reflux.createActions([
   'loadTable',
-  'updateTableRank',
+  'updateRank',
+  'toggleSelectRank',
+  'toggleEditRank',
+  'deselectRanks',
   'updateTableOrder'
 ]);
 
