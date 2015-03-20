@@ -12,10 +12,6 @@ var RankForm = React.createClass({
   componentDidMount: function() {
     this.refs.rank.getDOMNode().focus();
   },
-  shouldComponentUpdate: function(nextProps, nextState) {
-    // FIXME
-    return /[0, 1, 2, 3, 4, 5,]/.test(parseInt(nextProps.value, 10));
-  },
   handleBlur: function(e) {
     this.handleSubmit(e);
   },

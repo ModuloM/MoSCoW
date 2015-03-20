@@ -11,17 +11,23 @@ var React = require('react/addons'),
 var Rank = React.createClass({
   displayName: 'Rank',
   propTypes: {
-      // rank: React.PropTypes.oneOf([0, 1, 2, 3, 4, 5,'0','1','2','3','4','5']),
-      rank: React.PropTypes.object,
-      stack: React.PropTypes.object,
-      descriptorCode: React.PropTypes.string
+    rank: React.PropTypes.object,
+    selected: React.PropTypes.bool,
+    editable: React.PropTypes.bool
   },
   componentWillMount: function () {
   },
-  // shouldComponentUpdate: function(nextProps, nextState) {
-  //   // FIXME
-  //   return /[0, 1, 2, 3, 4, 5,]/.test(parseInt(nextProps.value, 10));
-  // },
+  componentWillUpdate: function (nextProps, nextState) {
+  },
+  shouldComponentUpdate: function(nextProps, nextState) {
+    return /[0, 1, 2, 3, 4, 5,]/.test(nextState.rank.value);
+  },
+  getDefaultProps: function() {
+    return {
+      selected: false,
+      editable: false
+    };
+  },
   getInitialState: function() {
     return {
       rank: this.props.rank
@@ -30,19 +36,13 @@ var Rank = React.createClass({
   handleClick: function(e) {
     if (!this.props.editable) {
       TableActions.toggleSelectRank(this.state.rank, !this.props.selected);
-      // this.setState({selected : !this.state.selected});
-      // this.props.onSelectRank(this.state.rank);
     }
   },
   handleDoubleClick: function(e) {
     TableActions.toggleEditRank(this.state.rank, !this.props.editable);
-    // this.setState({editable : !this.state.editable});
-    // this.props.onDeselectRanks();
   },
   handleRankSubmit: function(value) {
-    TableActions.updateRank(this.state.rank, value);
-    // TableActions.toggleEditRank(this.state.rank, !this.props.editable);
-    // this.props.onDeselectRanks();
+    TableActions.updateRank(this.state.rank.id, value);
   },
   render: function() {
     var ranking = this.state.rank ? this.state.rank.value : 0;
@@ -56,7 +56,6 @@ var Rank = React.createClass({
     //   'rank--5' : this.state.rank === 5,
     //   'rank--selected': this.state.selected
     // });
-    var rankCurrent = this.state.rank ? this.state.rank.value : 0;
     var rankClasses = 'rank--' + this.state.rank.value;
     // var rankCurrent = this.state.rank ? this.state.rank.value : 0;
     // var rankClasses = 'rank--' + rankCurrent;

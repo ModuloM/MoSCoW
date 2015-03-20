@@ -11,9 +11,16 @@ html {
   -webkit-font-smoothing: antialiased;
   background: #fff;
 }
+.table-column {
+  display: table-cell;
+}
 .table-row {
   display: table-row;
   height: 3em;
+}
+.text-container {
+  padding: .4em;
+  border: thin dotted #333;
 }
 .rank-list {
   &:after {
