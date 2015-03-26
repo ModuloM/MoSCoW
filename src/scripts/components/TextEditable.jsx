@@ -1,7 +1,5 @@
 'use strict';
 
-/** @jsx React.DOM **/
-
 var React = require('react/addons'),
     Reflux = require('reflux'),
     TextEditableActions = require('../actions/TextEditableActions'),
@@ -47,7 +45,9 @@ var TextEditable = React.createClass({
       element = <div className="" onDoubleClick={this.handleDoubleClick}>{this.state.value}</div>
     }
     return (
-        element
+      <div className="text-container">
+        {element}
+      </div>
     );
   }
 });

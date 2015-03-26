@@ -1,7 +1,5 @@
 'use strict';
 
-/** @jsx React.DOM */
-
 var React = require('react/addons'),
     classSet = React.addons.classSet,
     Reflux = require('reflux'),

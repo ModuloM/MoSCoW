@@ -1,7 +1,5 @@
 'use strict';
 
-/** @jsx React.DOM */
-
 var React = require('react');
 
 var TextEditableForm = React.createClass({
@@ -22,12 +20,9 @@ var TextEditableForm = React.createClass({
     },
     render: function () {
       var value = this.props.value;
-      // TODO fix buttons
       return (
         <form className="textEditableForm" onSubmit={this.handleSubmit}>
           <textarea ref="text" defaultValue={value} onBlur={this.handleBlur} />
-          <button type="button" text="cancel"/>
-          <button type="submit" text="update"/>
         </form>
       );
     }

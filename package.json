@@ -6,9 +6,11 @@
   "dependencies": {
     "lodash": "^3.5.0",
     "react": "^0.12.2",
+    "react-dnd": "^0.9.8",
     "reflux": "^0.2.5"
   },
   "devDependencies": {
+    "babelify": "^5.0.4",
     "browserify": "^8.1.0",
     "catw": "^0.2.0",
     "chai": "^1.9.1",
@@ -23,10 +25,10 @@
   },
   "scripts": {
     "watch-css": "catw -c 'sassc ' 'src/styles/*.scss' -o public/styles/app.css -v",
-    "watch-js": "watchify -t reactify src/**/*.jsx -d -o public/scripts/app.js",
+    "watch-js": "watchify -t babelify src/**/*.jsx -d -o public/scripts/app.js",
     "watch": "livereload public/ & npm run watch-js & npm run watch-css",
     "build-css": "catw -c 'sassc ' 'src/styles/*.scss' > public/styles/app.css",
-    "build-js": "browserify -t reactify src/**/*.jsx > public/scripts/app.js",
+    "build-js": "browserify -t babelify src/**/*.jsx > public/scripts/app.js",
     "build": "npm run build-css && npm run build-js && npm run build-css",
     "test": "mocha -R spec -u bdd"
   },

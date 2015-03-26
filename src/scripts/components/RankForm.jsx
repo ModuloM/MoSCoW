@@ -1,7 +1,5 @@
 'use strict';
 
-/** @jsx React.DOM */
-
 var React = require('react/addons');
 
 var RankForm = React.createClass({
