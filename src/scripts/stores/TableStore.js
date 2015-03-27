@@ -24,9 +24,9 @@ var TableStore = Reflux.createStore({
         },
         {
           id: 2,
-          type: 'criteria',
-          code: 'CRITERIA1',
-          label: 'criteria1',
+          type: 'criterion',
+          code: 'CRITERION1',
+          label: 'criterion1',
           weight: 1,
           order: 1
         },
@@ -40,9 +40,9 @@ var TableStore = Reflux.createStore({
         },
         {
           id: 4,
-          type: 'criteria',
-          code: 'CRITERIA2',
-          label: 'criteria2',
+          type: 'criterion',
+          code: 'CRITERION2',
+          label: 'criterion2',
           weight: 2,
           order: 2
         },
@@ -70,31 +70,31 @@ var TableStore = Reflux.createStore({
       ranks : [
         {
           id: 1,
-          descriptor_code: 'CRITERIA2',
+          descriptor_code: 'CRITERION2',
           stack_id: 1,
           value: 3,
-          notes: 'Notes on criteria two'
+          notes: 'Notes on criterion two'
         },
         {
           id: 2,
-          descriptor_code: 'CRITERIA1',
+          descriptor_code: 'CRITERION1',
           stack_id: 1,
           value: 5,
-          notes: 'Notes on criteria one'
+          notes: 'Notes on criterion one'
         },
         {
           id: 3,
-          descriptor_code: 'CRITERIA1',
+          descriptor_code: 'CRITERION1',
           stack_id: 2,
           value: 1,
-          notes: 'Other notes on criteria one'
+          notes: 'Other notes on criterion one'
         },
         {
           id: 4,
-          descriptor_code: 'CRITERIA2',
+          descriptor_code: 'CRITERION2',
           stack_id: 2,
           value: 4,
-          notes: 'Other notes on criteria two'
+          notes: 'Other notes on criterion two'
         }
       ]
     };
