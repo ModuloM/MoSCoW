@@ -11,16 +11,42 @@ html {
   -webkit-font-smoothing: antialiased;
   background: #fff;
 }
+input, p, form {
+  border: none;
+  margin: 0;
+}
+[draggable] {
+  cursor: move;
+}
+.table {
+  min-width: 25em;
+  max-width: 50em;
+  vertical-align: top;
+}
 .table-column {
   display: table-cell;
 }
-.table-row {
-  display: table-row;
+.table-row__content {
+  display: inline-block;
   height: 3em;
+  padding: 1em;
+}
+.table-row {
+  display: inline-block;
+  border: thin dotted #ccc;
+  height: 3em;
+  width: 100%;
 }
 .text-container {
+  display: table-cell;
   padding: .4em;
-  border: thin dotted #333;
+  margin: 0;
+  min-width: 20em;
+  max-width: 50em;
+  border: thin dotted #ccc;
+}
+.text-container--input {
+  /* TODO */
 }
 .rank-list {
   &:after {
@@ -28,7 +54,7 @@ html {
   }
 }
 .rank-container {
-  display: table-cell;
+  display: inline-block;
   padding: .5em;
 }
 .rank {

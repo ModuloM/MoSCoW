@@ -9,7 +9,7 @@ var TableActions = Reflux.createActions([
   'toggleSelectRank',
   'toggleEditRank',
   'deselectRanks',
-  'updateTableOrder'
+  'updateDescriptorOrder'
 ]);
 
 module.exports = TableActions;

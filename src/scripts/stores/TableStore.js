@@ -162,6 +162,18 @@ var TableStore = Reflux.createStore({
     console.log(`Rank ${editedRank.id} is editable`);
     this.trigger(this.table);
   },
+  onUpdateDescriptorOrder: function(movedDescriptorsId, overedDescriptorId) {
+    var rows = this.table.descriptors;
+    var rowMovedIdx = _.findIndex(rows, { 'id' : movedDescriptorsId });
+    var rowOveredIdx = _.findIndex(rows, { 'id' : overedDescriptorId });
+    var modifier = rows[rowOveredIdx].order > rows[rowMovedIdx].order ? 1 : -1;
+    console.log(`Moved ${rowMovedIdx} descriptors ${rows[rowMovedIdx].label} order ${rows[rowMovedIdx].order} is updated with ${modifier}`);
+    console.log(`Overed ${rowOveredIdx} descriptors ${rows[rowOveredIdx].label} order ${rows[rowOveredIdx].order} is updated with - ${modifier}`);
+    rows[rowMovedIdx].order += modifier;
+    rows[rowOveredIdx].order -= modifier;
+    this.table.descriptors = rows;
+    this.trigger(this.table);
+  }
 });
 
 module.exports = TableStore;
