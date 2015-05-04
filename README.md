@@ -7,10 +7,13 @@ Compare & rank stacks
 
     gem install sass
     brew install sassc
-    npm install -g browserify
-    npm install -g catw
     git clone 
     (sudo) npm install
+
+if no public/scripts & public/styles:
+
+    mkdir public/scripts
+    mkdir public/styles
 
 Build
 
