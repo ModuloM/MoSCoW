@@ -166,13 +166,16 @@ var TableStore = Reflux.createStore({
     var rows = this.table.descriptors;
     var rowMovedIdx = _.findIndex(rows, { 'id' : movedDescriptorsId });
     var rowOveredIdx = _.findIndex(rows, { 'id' : overedDescriptorId });
-    var modifier = rows[rowOveredIdx].order > rows[rowMovedIdx].order ? 1 : -1;
-    console.log(`Moved ${rowMovedIdx} descriptors ${rows[rowMovedIdx].label} order ${rows[rowMovedIdx].order} is updated with ${modifier}`);
-    console.log(`Overed ${rowOveredIdx} descriptors ${rows[rowOveredIdx].label} order ${rows[rowOveredIdx].order} is updated with - ${modifier}`);
-    rows[rowMovedIdx].order += modifier;
-    rows[rowOveredIdx].order -= modifier;
-    this.table.descriptors = rows;
-    this.trigger(this.table);
+    // Bind drag between header & footer
+    if (overedDescriptorId !== 1 && overedDescriptorId !== rows.length) {
+      var modifier = rows[rowOveredIdx].order > rows[rowMovedIdx].order ? 1 : -1;
+      rows[rowMovedIdx].order += modifier;
+      rows[rowOveredIdx].order -= modifier;
+      this.table.descriptors = rows;
+      this.trigger(this.table);    
+    }
+    // console.log(`Moved ${rowMovedIdx} descriptors ${rows[rowMovedIdx].label} order ${rows[rowMovedIdx].order} is updated with ${modifier}`);
+    // console.log(`Overed ${rowOveredIdx} descriptors ${rows[rowOveredIdx].label} order ${rows[rowOveredIdx].order} is updated with - ${modifier}`);
   }
 });
 
