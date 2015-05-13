@@ -6,6 +6,7 @@ $rank1: #dadada;
 $foreground-light: #fff;
 $foreground-dark: #6d626b;
 $border-selected: solid .3em $rank5;
+$border-table: thin dotted #ccc;
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -19,23 +20,40 @@ input, p, form {
   cursor: move;
 }
 .table {
+  display: inline-table;
+  padding: .4em;
   min-width: 25em;
   max-width: 50em;
   vertical-align: top;
+  border: $border-table;
 }
 .table-column {
-  display: table-cell;
+  /* TODO transform to flex layout */
+  display: inline-block;
+  vertical-align: top;
 }
 .table-row__content {
-  display: inline-block;
-  height: 3em;
+  display: table-cell;
   padding: 1em;
+  border: $border-table;
 }
 .table-row {
-  display: inline-block;
-  border: thin dotted #ccc;
-  height: 3em;
+  display: table-row;
   width: 100%;
+}
+.table-cell {
+  display: table-cell;
+  padding: .5em;
+  min-width: 4em;
+  text-align: center;
+  border: $border-table;
+}
+.table-cell__header,
+.table-cell__footer  {
+  @extend .table-cell;
+}
+.table-cell__header img {
+  max-width: 3em;
 }
 .text-container {
   display: table-cell;
@@ -43,7 +61,7 @@ input, p, form {
   margin: 0;
   min-width: 20em;
   max-width: 50em;
-  border: thin dotted #ccc;
+  border: $border-table;
 }
 .text-container--input {
   /* TODO */
@@ -53,11 +71,8 @@ input, p, form {
     clear: both;
   }
 }
-.rank-container {
-  display: inline-block;
-  padding: .5em;
-}
 .rank {
+  display: inline-block;
   text-align: center;
   vertical-align: middle;
   width: 1.8em;

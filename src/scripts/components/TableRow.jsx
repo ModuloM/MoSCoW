@@ -94,7 +94,7 @@ var TableRow = React.createClass({
       sum[stack.id] = 0
       rows.map(function (row) {
         if (row.type === 'criterion') {
-          // if row is a criterion, we sum rank value mutliplied by row's weight
+          // if row is a criterion, we sum rank value multiplied by row's weight
           var rank = _.find(ranks, {'descriptor_code' : row.code, stack_id : stack.id});
           sum[stack.id] += rank.value * row.weight;
         } else if (row.type === 'category') {
@@ -132,7 +132,12 @@ var TableRow = React.createClass({
               rank;
           if (type === 'header') {
             // TODO change header style
-            tableRow = <div key={stack.id} className="rank-container">{stack.label}</div>
+            tableRow = 
+              <div key={stack.id} className="table-cell__header">
+                <a href={stack.url}>
+                  <img src={stack.logo} alt={stack.label} title={stack.label}/>
+                </a>
+              </div>
           } else if (type === 'criterion'){
             rank = _.find( ranks, { 'descriptor_code' : code, 'stack_id' : stack.id});
             tableRow = <Rank key={rank.id} stack={stack} descriptorCode={code} rank={rank} selected={rank.selected} editable={rank.editable}></Rank>
@@ -141,7 +146,7 @@ var TableRow = React.createClass({
           }
           if (type === 'footer') {
             // TODO change footer style
-            tableRow = <div key={stack.id} className="rank-container">{sum[stack.id]}</div>
+            tableRow = <div key={stack.id} className="table-cell__footer">{sum[stack.id]}</div>
           }
           return (
             tableRow 

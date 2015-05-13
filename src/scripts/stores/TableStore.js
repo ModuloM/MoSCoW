@@ -59,11 +59,15 @@ var TableStore = Reflux.createStore({
         {
           id: 1,
           label: 'react.js',
+          logo: 'http://facebook.github.io/react/img/logo.svg',
+          url: 'https://angularjs.org/',
           order: 1
         },
         {
           id: 2,
           label: 'angular.js',
+          logo: 'https://angularjs.org/favicon.ico',
+          url: 'http://facebook.github.io/react/docs/',
           order: 2
         }
       ],

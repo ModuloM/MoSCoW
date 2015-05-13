@@ -70,7 +70,7 @@ var Rank = React.createClass({
     }
 
     return (
-      <div className="rank-container">
+      <div className="table-cell">
         {element}
       </div>
     );
