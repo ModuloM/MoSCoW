@@ -7,7 +7,9 @@ var React = require('react/addons'),
     TableStore = require('../stores/TableStore'),
     TextEditable = require('../components/TextEditable.jsx'),
     TextEditableStore = require('../stores/TextEditableStore'),
-    TableRow = require('./TableRow.jsx');
+    TableRow = require('./TableRow.jsx'),
+    TableHeader = require('./TableHeader.jsx'),
+    TableFooter = require('./TableFooter.jsx');
 
 var Table = React.createClass({
   displayName: 'Table',
@@ -44,40 +46,38 @@ var Table = React.createClass({
       return a.order > b.order;
     });
     var ranks = this.state.ranks;
-    var handleMoveTableRow = _.bind(this.handleMoveTableRow, this);
+    const handleMoveTableRow = _.bind(this.handleMoveTableRow, this);
     return (
       <div className="table">
         <div className="table-column">
         {rows.map( function(row) {
-          return (
-            <TableRow key={row.id} 
-                      row={row} 
-                      rows={rows} 
-                      stacks={stacks} 
-                      ranks={ranks}
-                      onMoveTableRow={handleMoveTableRow}></TableRow>
-            // <div key={id} {...dragSourceFor(ItemTypes.TABLE_ROW)} className="table-row">{type} / {weight} / {label} / /
-            // {stacks.map( function(stack) {
-            //   var tableRow,
-            //       rank;
-            //   if (type === 'header') {
-            //     // TODO change header style
-            //     tableRow = <div key={stack.id} className="rank-container">{stack.label}</div>
-            //   } else if (type === 'criterion'){
-            //     rank = _.find( ranks, { 'descriptor_code' : code, 'stack_id' : stack.id});
-            //     tableRow = <Rank key={rank.id} stack={stack} descriptorCode={code} rank={rank} selected={rank.selected} editable={rank.editable}></Rank>
-            //   } else if (type === 'category') {
-            //     // TODO define category row
-            //   }
-            //   if (type === 'footer') {
-            //     // TODO change footer style
-            //     tableRow = <div key={stack.id} className="rank-container">{sum[stack.id]}</div>
-            //   }
-            //   return (
-            //     tableRow 
-            //   )
-            // })}</div>
-          );
+          let tableRow;
+          if (row.type === 'header') {
+            tableRow = <TableHeader key={row.id}
+                          row={row} 
+                          stacks={stacks}></TableHeader>
+          } else if (row.type === 'criterion') {
+            tableRow = <TableRow key={row.id} 
+                          row={row} 
+                          rows={rows} 
+                          stacks={stacks} 
+                          ranks={ranks}
+                          onMoveTableRow={handleMoveTableRow}></TableRow>
+          } else if (row.type === 'category') {
+            tableRow = <TableRow key={row.id} 
+                          row={row} 
+                          rows={rows} 
+                          stacks={stacks} 
+                          ranks={ranks}
+                          onMoveTableRow={handleMoveTableRow}></TableRow>
+          } else if (row.type === 'footer') {
+            tableRow = <TableFooter key={row.id} 
+                          row={row} 
+                          rows={rows} 
+                          stacks={stacks} 
+                          ranks={ranks}></TableFooter>
+          }
+          return tableRow;
         })}</div>
         <div className="table-column" >
           <TextEditable></TextEditable>

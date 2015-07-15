@@ -1,6 +1,6 @@
 'use strict';
 
-var Reflux = require('reflux'),
+const Reflux = require('reflux'),
     _ = require('lodash');
 
 var TableStore = Reflux.createStore({
@@ -60,14 +60,14 @@ var TableStore = Reflux.createStore({
           id: 1,
           label: 'react.js',
           logo: 'http://facebook.github.io/react/img/logo.svg',
-          url: 'https://angularjs.org/',
+          url: 'http://facebook.github.io/react/docs/getting-started.html',
           order: 1
         },
         {
           id: 2,
           label: 'angular.js',
           logo: 'https://angularjs.org/favicon.ico',
-          url: 'http://facebook.github.io/react/docs/',
+          url: 'https://angularjs.org/',
           order: 2
         }
       ],
@@ -115,7 +115,7 @@ var TableStore = Reflux.createStore({
   },
   onUpdateRank: function(rankId, value) {
     if (value >= 0 && value <= 5) {
-      var rankIdx = this.getRankIdx(rankId);
+      let rankIdx = this.getRankIdx(rankId);
       this.table.ranks[rankIdx].value = value;
       this.table.ranks[rankIdx].editable = false;
       this.table.ranks[rankIdx].selected = false;
@@ -136,7 +136,7 @@ var TableStore = Reflux.createStore({
   },
   onUpdateRankText: function(rankId, text) {
     console.log(rankId, text);
-    var rankIdx = this.getRankIdx(rankId);
+    let rankIdx = this.getRankIdx(rankId);
     this.table.ranks[rankIdx].notes = text;
     this.table.ranks[rankIdx].selected = true;
     console.log(`Rank ${rankId}’s notes updated with ${text}.`)
@@ -166,13 +166,13 @@ var TableStore = Reflux.createStore({
     console.log(`Rank ${editedRank.id} is editable`);
     this.trigger(this.table);
   },
-  onUpdateDescriptorOrder: function(movedDescriptorsId, overedDescriptorId) {
-    var rows = this.table.descriptors;
-    var rowMovedIdx = _.findIndex(rows, { 'id' : movedDescriptorsId });
-    var rowOveredIdx = _.findIndex(rows, { 'id' : overedDescriptorId });
+  onUpdateDescriptorOrder: function(movedDescriptorId, overedDescriptorId) {
+    let rows = this.table.descriptors;
+    let rowMovedIdx = _.findIndex(rows, { 'id' : movedDescriptorId });
+    let rowOveredIdx = _.findIndex(rows, { 'id' : overedDescriptorId });
     // Bind drag between header & footer
     if (overedDescriptorId !== 1 && overedDescriptorId !== rows.length) {
-      var modifier = rows[rowOveredIdx].order > rows[rowMovedIdx].order ? 1 : -1;
+      let modifier = rows[rowOveredIdx].order > rows[rowMovedIdx].order ? 1 : -1;
       rows[rowMovedIdx].order += modifier;
       rows[rowOveredIdx].order -= modifier;
       this.table.descriptors = rows;

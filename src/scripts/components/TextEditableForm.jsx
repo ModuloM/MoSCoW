@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react');
+const React = require('react');
 
 var TextEditableForm = React.createClass({
     displayName: 'TextEditableForm',
@@ -15,14 +15,14 @@ var TextEditableForm = React.createClass({
     },
     handleSubmit: function(e) {
       e.preventDefault();
-      var text = this.refs.text.getDOMNode().value.trim();
+      let text = this.refs.text.getDOMNode().value.trim();
       this.props.onTextEditableSubmit(text);
     },
     render: function () {
       var value = this.props.value;
       return (
-        <form className="textEditableForm" onSubmit={this.handleSubmit}>
-          <textarea ref="text" defaultValue={value} onBlur={this.handleBlur} />
+        <form onSubmit={this.handleSubmit}>
+          <textarea ref="text" className="text-container__input" defaultValue={value} onBlur={this.handleBlur} />
         </form>
       );
     }

@@ -1,6 +1,6 @@
 'use strict';
 
-var Reflux = require('reflux'),
+const Reflux = require('reflux'),
     TableActions = require('../actions/TableActions');
 
 var TextEditableStore = Reflux.createStore({
