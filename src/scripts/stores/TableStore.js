@@ -69,6 +69,13 @@ var TableStore = Reflux.createStore({
           logo: 'https://angularjs.org/favicon.ico',
           url: 'https://angularjs.org/',
           order: 2
+        },
+        {
+          id: 3,
+          label: 'ember.js',
+          logo: 'http://www.gravatar.com/avatar/0cf15665a9146ba852bf042b0652780a?s=200',
+          url: 'http://emberjs.com/',
+          order: 3
         }
       ],
       ranks : [
@@ -99,6 +106,20 @@ var TableStore = Reflux.createStore({
           stack_id: 2,
           value: 4,
           notes: 'Other notes on criterion two'
+        },
+        {
+          id: 5,
+          descriptor_code: 'CRITERION1',
+          stack_id: 3,
+          value: 2,
+          notes: 'Other notes on criterion three'
+        },
+        {
+          id: 6,
+          descriptor_code: 'CRITERION2',
+          stack_id: 3,
+          value: 2,
+          notes: 'Other notes on criterion three'
         }
       ]
     };
