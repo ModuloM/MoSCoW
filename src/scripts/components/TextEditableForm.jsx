@@ -22,7 +22,7 @@ var TextEditableForm = React.createClass({
       var value = this.props.value;
       return (
         <form onSubmit={this.handleSubmit}>
-          <textarea ref="text" className="text-container__input" defaultValue={value} onBlur={this.handleBlur} />
+          <textarea ref="text" className="text-container__input" defaultValue={value} onBlur={this.handleBlur} rows="7" placeholder="Text by default" />
         </form>
       );
     }

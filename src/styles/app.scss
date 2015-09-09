@@ -6,6 +6,7 @@ $rank1: #dadada;
 $foreground-light: #fff;
 $foreground-dark: #6d626b;
 $border-selected: solid .3em $rank5;
+$border-selected--large: solid .5em $rank5;
 $border-table: thin dotted #ccc;
 
 html {
@@ -28,7 +29,6 @@ input, p, form {
   border: $border-table;
 }
 .table-column {
-  /* TODO transform to flex layout */
   display: inline-block;
   vertical-align: top;
 }
@@ -55,11 +55,14 @@ input, p, form {
 .table-cell__header img {
   max-width: 3em;
 }
+.table-cell__footer {
+  line-height: 2.8em;
+}
 .text-container {
   display: table-cell;
   padding: .4em;
   margin: 0;
-  min-width: 20em;
+  min-width: 19em;
   max-width: 20em;
   border: $border-table;
 }
@@ -131,4 +134,32 @@ input, p, form {
   @extend .rank;
   color: $foreground-light;
   background-color: $rank5;
+}
+.stack-sum {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  width: 2.4em;
+  line-height: 2.47em;
+  font-size: 1em;
+  border-radius: 1.9em;
+  font-family: helvetica;
+  cursor: pointer;
+}
+.stack-sum--selected {
+  border: $border-selected--large;
+  width: 2.5em;
+  height: 2.4em;
+  line-height: 2.47em;
+}
+.stack-sum--1 {
+  @extend .stack-sum;
+  @extend .stack-sum--selected;
+  color: $foreground-light;
+  background-color: $rank4;
+}
+.stack-sum--2 {
+  @extend .stack-sum;
+  color: $foreground-light;
+  background-color: $rank3;
 }
